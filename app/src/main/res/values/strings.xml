@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LIM</string>
+    <string name="permission_miss">未获得权限</string>
+</resources>
