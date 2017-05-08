@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.yiuhet.lim.MVPBaseActivity;
 import com.example.yiuhet.lim.R;
@@ -34,10 +33,11 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenterImp1
     EditText mPasswordedt;
     @BindView(R.id.edt_username)
     EditText mUsernameedt;
-    @BindView(R.id.btn_sign_up)
-    Button btnSignUp;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.imageView)
+    ImageView mImageView;
+    @BindView(R.id.tx_sign_up)
+    TextView mTxSignUp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,15 +132,20 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenterImp1
         //mProgressBar.setVisibility(View.VISIBLE);
     }
 
-    @OnClick({R.id.btn_sign_in, R.id.btn_sign_up})
+    @OnClick({R.id.btn_sign_in})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_sign_in:
                 startLogin();
                 break;
-            case R.id.btn_sign_up:
-                startActivity(RegisterActivity.class);
-                break;
+
         }
     }
+
+
+    @OnClick(R.id.tx_sign_up)
+    public void onViewClicked() {
+        startActivity(RegisterActivity.class,false);
+    }
+
 }

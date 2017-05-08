@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">LIM</string>
     <string name="permission_miss">未获得权限</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contact">联系人</string>
+    <string name="conversation">消息</string>
+    <string name="setting">我</string>
 </resources>
