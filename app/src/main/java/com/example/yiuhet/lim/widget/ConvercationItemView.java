@@ -1,6 +1,7 @@
 package com.example.yiuhet.lim.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yiuhet.lim.R;
+import com.example.yiuhet.lim.ui.activity.ChatActivity;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -53,14 +55,16 @@ public class ConvercationItemView extends RelativeLayout {
     }
 
     public void bindView(final EMConversation emconversation) {
-        EMMessage emmessage = emconversation.getLastMessage();
+        final EMMessage emmessage = emconversation.getLastMessage();
         mUsernametx.setText(emmessage.getUserName());
         updateLastMessage(emmessage);
         updateUnreadCount(emconversation);
         mConversationItemContainer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //getContext().startActivity();
+                Intent intent = new Intent(getContext(),ChatActivity.class);
+                intent.putExtra("user_name",emmessage.getUserName());
+                getContext().startActivity(intent);
             }
         });
     }

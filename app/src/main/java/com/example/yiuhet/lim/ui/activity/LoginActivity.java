@@ -39,11 +39,7 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenterImp1
     TextView mTxSignUp;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-    }
 
     @Override
     protected void init() {

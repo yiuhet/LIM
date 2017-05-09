@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.yiuhet.lim.view.ConversationView;
 import com.example.yiuhet.lim.widget.ConvercationItemView;
@@ -44,7 +45,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         public ConvercationItemView mConversationItemView;
 
-        public ConversationItemHolder(ConvercationItemView itemView) {
+        public ConversationItemHolder(final ConvercationItemView itemView) {
             super(itemView);
             mConversationItemView = itemView;
         }

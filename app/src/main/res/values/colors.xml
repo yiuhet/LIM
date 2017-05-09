@@ -10,4 +10,5 @@
     <color name="blue_pressed">#00a1db</color>
     <color name="gray">#e8e8e8</color>
     <color name="gray_dark">#9c9c9c</color>
+    <color name="disabled">#559c9c9c</color>
 </resources>

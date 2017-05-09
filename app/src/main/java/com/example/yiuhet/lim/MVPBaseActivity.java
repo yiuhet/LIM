@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import android.widget.Toast;
  * Created by yiuhet on 2017/5/2.
  */
 
-public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends Activity {
+public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
     protected T mPresenter; //presenter对象
     private ProgressDialog mProgressDialog;
 
