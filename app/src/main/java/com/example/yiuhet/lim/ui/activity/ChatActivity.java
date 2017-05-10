@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +52,7 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
     @Override
     protected void init() {
         super.init();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         ButterKnife.bind(this);
         mUsername = getIntent().getStringExtra("user_name");
         initToolBar();
@@ -83,11 +86,22 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
         mRecycleView.setLayoutManager(mLinearLayoutManager);
         mMessageListAdapter = new MessageListAdapter(this, mPresenter.getMessages());
         mRecycleView.setAdapter(mMessageListAdapter);
-
+        mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int firstVisItemPos = mLinearLayoutManager.findFirstVisibleItemPosition();
+                    if (firstVisItemPos == 0) {
+                        mPresenter.loadMoreMessages(mUsername);
+                    }
+                }
+            }
+        });
     }
 
     private void initToolBar() {
         setSupportActionBar(mToolbar);
+
         getSupportActionBar().setTitle("与" + mUsername + "聊天中");
     }
 
@@ -144,7 +158,8 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
 
     @Override
     public void onSendMessageFailed(String error) {
-
+        mMessageListAdapter.notifyDataSetChanged();
+        toast(error);
     }
 
     @Override
@@ -161,7 +176,7 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
 
     @Override
     public void onNoMoreData() {
-
+        toast("没有更多的消息了!");
     }
     private void smoothScrollToBottom() {
         mRecycleView.smoothScrollToPosition(mMessageListAdapter.getItemCount() - 1);
@@ -207,6 +222,5 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
     protected void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().chatManager().removeMessageListener(mEMMessageListener);
-
     }
 }

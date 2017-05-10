@@ -101,7 +101,6 @@ public class ConversationFragment extends BaseFragment<ConversationView, Convers
             ThreadUtils.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    toast("收到一条新消息!");
                     mPresenter.loadAllConversations();
                 }
             });
@@ -165,7 +164,7 @@ public class ConversationFragment extends BaseFragment<ConversationView, Convers
 
     @Override
     public void onAllConversationsLoad() {
-        toast("会话加载成功!");
+        //toast("会话加载成功!");
     }
 
     @Override

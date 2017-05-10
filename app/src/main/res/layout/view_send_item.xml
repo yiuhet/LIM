@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,18 +16,42 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/bg_msg_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/login_heard"
+            android:layout_margin="8dp"
+            android:layout_alignParentRight="true"
+            />
         <TextView
             android:id="@+id/send_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"/>
-        <android.support.v4.widget.ContentLoadingProgressBar
+            android:layout_margin="8dp"
+            android:text="测试文本"
+            android:background="@mipmap/chat_right_qp"
+            android:layout_toLeftOf="@id/bg_msg_iv"
+            android:textSize="18sp"
+            android:maxWidth="200dp"
+            android:padding="20dp"/>
+        <ProgressBar
+            android:visibility="gone"
             android:id="@+id/send_progress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/send_tv"
+            />
+
+        <ImageView
+            android:id="@+id/error_iv"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/send_tv"
-            />
+            app:srcCompat="@mipmap/msg_error" />
     </RelativeLayout>
 </LinearLayout>

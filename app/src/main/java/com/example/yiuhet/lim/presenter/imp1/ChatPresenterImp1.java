@@ -110,8 +110,14 @@ public class ChatPresenterImp1 extends BasePresenter<ChatView> implements ChatPr
                     }
 
                     @Override
-                    public void onError(int code, String error) {
-                        mChatView.onSendMessageFailed(error);
+                    public void onError(int code, final String error) {
+                        ThreadUtils.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mChatView.onSendMessageFailed(error);
+                            }
+                        });
+
                     }
 
                     @Override
@@ -120,7 +126,7 @@ public class ChatPresenterImp1 extends BasePresenter<ChatView> implements ChatPr
                     }
                 });
                 mEmmessages.add(emMessage);
-                EMClient.getInstance().chatManager().saveMessage(emMessage);
+                EMClient.getInstance().chatManager().sendMessage(emMessage);
                 ThreadUtils.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

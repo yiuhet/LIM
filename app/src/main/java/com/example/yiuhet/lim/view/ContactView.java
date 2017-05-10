@@ -5,4 +5,13 @@ package com.example.yiuhet.lim.view;
  */
 
 public interface ContactView {
+
+    void onGetContactListSuccess();
+
+    void onGetContactListFailed();
+
+    void onDeleteSuccess();
+
+    void onDeleteFailed();
+
 }

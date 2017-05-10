@@ -1,13 +1,16 @@
 package com.example.yiuhet.lim.widget;
 
 import android.content.Context;
-import android.support.v4.widget.ContentLoadingProgressBar;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yiuhet.lim.R;
+import com.example.yiuhet.lim.utils.ThreadUtils;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -28,7 +31,9 @@ public class SendMessageItemView extends RelativeLayout {
     @BindView(R.id.send_tv)
     TextView mSendTv;
     @BindView(R.id.send_progress)
-    ContentLoadingProgressBar mSendProgress;
+    ProgressBar mSendProgress;
+    @BindView(R.id.error_iv)
+    ImageView mErrorIv;
 
     public SendMessageItemView(Context context) {
         this(context, null);
@@ -37,7 +42,7 @@ public class SendMessageItemView extends RelativeLayout {
     public SendMessageItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(getContext()).inflate(R.layout.view_send_item, this);
-        ButterKnife.bind(this,this);
+        ButterKnife.bind(this, this);
     }
 
     public void binView(EMMessage emMessage, boolean showTime) {
@@ -49,13 +54,17 @@ public class SendMessageItemView extends RelativeLayout {
     private void updateSendStatus(EMMessage emMessage) {
         switch (emMessage.status()) {
             case INPROGRESS:
-                mSendProgress.show();
+                mSendProgress.setVisibility(VISIBLE);
+                mErrorIv.setVisibility(GONE);
                 break;
             case SUCCESS:
-                mSendProgress.hide();
+                mSendProgress.setVisibility(GONE);
+                mErrorIv.setVisibility(GONE);
                 break;
             case FAIL:
-                mSendProgress.show();
+                mSendProgress.setVisibility(GONE);
+                mErrorIv.setVisibility(VISIBLE);
+                break;
         }
     }
 

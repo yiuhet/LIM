@@ -15,11 +15,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/receive_user_iv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/login_heard"
+            android:layout_margin="8dp"
+            android:layout_alignParentLeft="true"
+            />
         <TextView
             android:id="@+id/receive_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"/>
+            android:maxWidth="200dp"
+            android:text="测试文本123456789regwegvwesdcqwdqwdqwdwqsfcqwdfqwdqw"
+            android:layout_margin="8dp"
+            android:textSize="18sp"
+            android:background="@mipmap/chat_left_qp"
+            android:layout_toRightOf="@id/receive_user_iv"
+            android:padding="20dp"/>
     </RelativeLayout>
 </LinearLayout>

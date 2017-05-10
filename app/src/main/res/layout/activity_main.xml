@@ -4,13 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- This could be your fragment container, or something -->
-    <include layout="@layout/app_bar_main"/>
+    <include layout="@layout/layout_app_bar"/>
 
     <FrameLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar" />
+        android:layout_above="@+id/bottomBar"
+        android:layout_below="@+id/appbar_layout"/>
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
