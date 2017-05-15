@@ -2,7 +2,6 @@ package com.example.yiuhet.lim.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -10,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yiuhet.lim.R;
-import com.example.yiuhet.lim.utils.ThreadUtils;
+import com.example.yiuhet.lim.utils.SendAgainListener;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -20,6 +19,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by yiuhet on 2017/5/9.
@@ -35,6 +35,8 @@ public class SendMessageItemView extends RelativeLayout {
     @BindView(R.id.error_iv)
     ImageView mErrorIv;
 
+    private SendAgainListener mSendListener;
+
     public SendMessageItemView(Context context) {
         this(context, null);
     }
@@ -45,7 +47,8 @@ public class SendMessageItemView extends RelativeLayout {
         ButterKnife.bind(this, this);
     }
 
-    public void binView(EMMessage emMessage, boolean showTime) {
+    public void binView(EMMessage emMessage, boolean showTime,SendAgainListener sendAgainListener) {
+        mSendListener = sendAgainListener;
         updateTime(emMessage, showTime);
         updateMessageBody(emMessage);
         updateSendStatus(emMessage);
@@ -83,6 +86,14 @@ public class SendMessageItemView extends RelativeLayout {
             mTimeTv.setText(DateUtils.getTimestampString(new Date(emMessage.getMsgTime())));
         } else {
             mTimeTv.setVisibility(GONE);
+        }
+    }
+
+
+    @OnClick(R.id.error_iv)
+    public void onViewClicked() {
+        if (mSendListener != null) {
+            mSendListener.send(mSendTv.getText().toString());
         }
     }
 }

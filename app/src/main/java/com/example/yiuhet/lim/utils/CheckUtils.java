@@ -6,9 +6,9 @@ package com.example.yiuhet.lim.utils;
 
 public class CheckUtils {
 
-    private static final String USER_NAME_REGEX = "^[a-zA-Z]\\w{2,19}$";
+    private static final String USER_NAME_REGEX = "^[a-zA-Z]\\w{2,17}$";
 
-    private static final String PASSWORD_REGEX = "^[0-9]{3,20}$";
+    private static final String PASSWORD_REGEX = "^[0-9]{6,18}$";
 
     public static boolean checkUserName(String userName) {
         return userName.matches(USER_NAME_REGEX);

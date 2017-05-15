@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.yiuhet.lim.BaseFragment;
 import com.example.yiuhet.lim.R;
 import com.example.yiuhet.lim.adapter.ConversationAdapter;
 import com.example.yiuhet.lim.presenter.imp1.ConversationPresenterImp1;
+import com.example.yiuhet.lim.utils.ConvercationItemTouchCallback;
 import com.example.yiuhet.lim.utils.ThreadUtils;
 import com.example.yiuhet.lim.view.ConversationView;
 import com.hyphenate.EMMessageListener;
@@ -89,6 +91,9 @@ public class ConversationFragment extends BaseFragment<ConversationView, Convers
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mConversationAdapter = new ConversationAdapter(getContext(), mPresenter.getConversations());
         mRecyclerView.setAdapter(mConversationAdapter);
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ConvercationItemTouchCallback(mConversationAdapter, mPresenter.getConversations()));
+        helper.attachToRecyclerView(mRecyclerView);
 
         mPresenter.loadAllConversations();
         EMClient.getInstance().chatManager().addMessageListener(mEMMessageListener);

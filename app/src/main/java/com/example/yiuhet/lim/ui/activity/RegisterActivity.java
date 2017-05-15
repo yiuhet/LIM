@@ -67,23 +67,23 @@ public class RegisterActivity extends MVPBaseActivity<RegisterView, RegisterPres
 
     @Override
     public void onUserNameError() {
-        mNewUsernameedt.setError("用户名不合法");
+        mNewUsernameedt.setError(getString(R.string.username_error));
     }
 
     @Override
     public void onPasswordError() {
-        mNewPasswordedt.setError("密码不合法");
+        mNewPasswordedt.setError(getString(R.string.password_error));
     }
 
     @Override
     public void onPassword2Error() {
-        mNewPassword2edt.setError("两次密码不一致");
+        mNewPassword2edt.setError(getString(R.string.password_different));
     }
 
     @Override
     public void onRegisterUserExit() {
         hideProgress();
-        toast("用户名已存在");
+        mNewUsernameedt.setError(getString(R.string.username_used));
     }
 
 

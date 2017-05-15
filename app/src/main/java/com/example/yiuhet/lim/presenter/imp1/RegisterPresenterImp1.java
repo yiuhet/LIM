@@ -51,10 +51,8 @@ public class RegisterPresenterImp1 extends BasePresenter<RegisterView> implement
             public void done(User user, BmobException e) {
                 if (e == null) {
                     registerEaseMob(userName,password);
-                    Log.d("ppap.","注册快要成功了！！！");
                 } else {
                     toastRegisterFailed(e);
-                    Log.d("ppap.","注册shibai！！！");
                 }
             }
 

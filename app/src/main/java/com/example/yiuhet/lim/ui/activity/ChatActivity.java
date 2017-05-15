@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.WindowManager;
@@ -19,6 +18,7 @@ import com.example.yiuhet.lim.MVPBaseActivity;
 import com.example.yiuhet.lim.R;
 import com.example.yiuhet.lim.adapter.MessageListAdapter;
 import com.example.yiuhet.lim.presenter.imp1.ChatPresenterImp1;
+import com.example.yiuhet.lim.utils.SendAgainListener;
 import com.example.yiuhet.lim.utils.ThreadUtils;
 import com.example.yiuhet.lim.view.ChatView;
 import com.hyphenate.EMMessageListener;
@@ -41,13 +41,14 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
     Button mSendbtn;
     @BindView(R.id.recycle_view)
     RecyclerView mRecycleView;
+    @BindView(R.id.toolbar_title)
+    TextView mToolbarTitle;
 
     private String mUsername;
 
     private LinearLayoutManager mLinearLayoutManager;
 
     private MessageListAdapter mMessageListAdapter;
-
 
     @Override
     protected void init() {
@@ -84,7 +85,7 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
     private void initRecycleView() {
         mLinearLayoutManager = new LinearLayoutManager(this);
         mRecycleView.setLayoutManager(mLinearLayoutManager);
-        mMessageListAdapter = new MessageListAdapter(this, mPresenter.getMessages());
+        mMessageListAdapter = new MessageListAdapter(this, mPresenter.getMessages(), mSendListener);
         mRecycleView.setAdapter(mMessageListAdapter);
         mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -101,8 +102,8 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
 
     private void initToolBar() {
         setSupportActionBar(mToolbar);
-
-        getSupportActionBar().setTitle("与" + mUsername + "聊天中");
+        mToolbarTitle.setText("与" + mUsername + "聊天中");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -178,6 +179,7 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
     public void onNoMoreData() {
         toast("没有更多的消息了!");
     }
+
     private void smoothScrollToBottom() {
         mRecycleView.smoothScrollToPosition(mMessageListAdapter.getItemCount() - 1);
     }
@@ -189,7 +191,7 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
                 @Override
                 public void run() {
                     EMMessage msg = messages.get(0);
-                    if (msg.getUserName().equals(mUsername)){
+                    if (msg.getUserName().equals(mUsername)) {
                         mPresenter.isRead(mUsername);
                         mMessageListAdapter.addNewMessage(msg);
                         smoothScrollToBottom();
@@ -218,9 +220,24 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
 
         }
     };
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EMClient.getInstance().chatManager().removeMessageListener(mEMMessageListener);
+    }
+
+    private SendAgainListener mSendListener = new SendAgainListener() {
+        @Override
+        public void send(String msg) {
+            mPresenter.sendMessage(mUsername, msg);
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

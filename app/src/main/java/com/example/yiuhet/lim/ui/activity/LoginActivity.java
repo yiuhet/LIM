@@ -38,9 +38,6 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenterImp1
     @BindView(R.id.tx_sign_up)
     TextView mTxSignUp;
 
-
-
-
     @Override
     protected void init() {
         super.init();
@@ -94,12 +91,12 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenterImp1
 
     @Override
     public void onUserNameError() {
-        mUsernameedt.setError("用户名不合法");
+        mUsernameedt.setError(getString(R.string.username_error));
     }
 
     @Override
     public void onPasswordError() {
-        mPasswordedt.setError("密码不合法");
+        mPasswordedt.setError(getString(R.string.password_error));
     }
 
     @Override

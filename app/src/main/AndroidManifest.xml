@@ -19,6 +19,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".app.lImApplication"
         android:allowBackup="true"
@@ -64,9 +69,13 @@
         </receiver>
 
         <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.ChatActivity"
+        <activity
+            android:name=".ui.activity.ChatActivity"
             android:windowSoftInputMode="adjustResize"
-            ></activity>
+            android:parentActivityName=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.AddFriendActivity"
+            android:parentActivityName=".ui.activity.MainActivity"/>
+
     </application>
 
 </manifest>

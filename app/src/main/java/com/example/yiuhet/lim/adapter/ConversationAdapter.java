@@ -36,6 +36,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     }
 
 
+
     @Override
     public int getItemCount() {
         return mConversations.size();

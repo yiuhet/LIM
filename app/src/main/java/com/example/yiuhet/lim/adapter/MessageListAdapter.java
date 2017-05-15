@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.yiuhet.lim.utils.SendAgainListener;
 import com.example.yiuhet.lim.widget.ReceiveMessageItemView;
 import com.example.yiuhet.lim.widget.SendMessageItemView;
 import com.hyphenate.chat.EMMessage;
@@ -24,12 +25,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private List<EMMessage> mMessageList;
 
+    private SendAgainListener mSendListener;
+
     private static final int SEND_MESSAGE = 0;
     private static final int RECEIVE_MESSAGE = 1;
 
-    public MessageListAdapter(Context context, List<EMMessage> emMessages) {
+    public MessageListAdapter(Context context, List<EMMessage> emMessages, SendAgainListener sendAgainListener) {
         mContext = context;
         mMessageList = emMessages;
+        mSendListener = sendAgainListener;
     }
 
 
@@ -49,7 +53,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             showTime = true;
         }
         if (holder instanceof SendItemViewHolder) {
-            ((SendItemViewHolder) holder).mSendMessageItemView.binView(mMessageList.get(position), showTime);
+            ((SendItemViewHolder) holder).mSendMessageItemView.binView(mMessageList.get(position), showTime, mSendListener);
         } else {
             ((ReceiveItemViewHolder) holder).mReceiveMessageItemView.binView(mMessageList.get(position), showTime);
         }

@@ -1,9 +1,12 @@
 package com.example.yiuhet.lim.ui.fragment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,6 +50,7 @@ public class ContactFragment extends BaseFragment<ContactView, ContactPresenterI
 
     private OnFragmentInteractionListener mListener;
     private ContactListAdapter mContactListAdapter;
+    private AlertDialog.Builder dialog;
 
     public ContactFragment() {
         // Required empty public constructor
@@ -142,12 +146,14 @@ public class ContactFragment extends BaseFragment<ContactView, ContactPresenterI
 
     @Override
     public void onDeleteSuccess() {
-
+        mPresenter.refresh();
+        toast("删除成功");
     }
 
     @Override
     public void onDeleteFailed() {
         mPresenter.refresh();
+        toast("删除失败");
     }
 
     @Override
@@ -187,7 +193,25 @@ public class ContactFragment extends BaseFragment<ContactView, ContactPresenterI
 
         @Override
         public void onItemLongClick(String userName) {
-            toast("删除好友，todo..");
+            showDialog(userName);
         }
     };
+
+    private void showDialog(final String userName) {
+        dialog = new AlertDialog.Builder(getActivity());
+        dialog.setTitle("提示信息：");
+        dialog.setMessage("是否确定删除此好友： " + userName);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.delete(userName);
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        dialog.show();
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.yiuhet.lim.ui.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.yiuhet.lim.R;
 import com.example.yiuhet.lim.factory.FragmentFactory;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     BottomBar mBottomBar;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.toolbar_title)
+    TextView mToolbarTitle;
 
 
     @Override
@@ -52,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.contentContainer, FragmentFactory.getInstance().getFragment(tabId)).commit();
                 switch (tabId) {
                     case R.id.tab_contact:
-                        getSupportActionBar().setTitle(R.string.contact);
+                        mToolbarTitle.setText(R.string.contact);
                         break;
                     case R.id.tab_conversation:
-                        getSupportActionBar().setTitle(R.string.conversation);
+                        mToolbarTitle.setText(R.string.conversation);
                         break;
                     case R.id.tab_setting:
-                        getSupportActionBar().setTitle(R.string.setting);
+                        mToolbarTitle.setText(R.string.setting);
                         break;
                 }
             }
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -88,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add:
-
+                startActivity(new Intent(this, AddFriendActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
