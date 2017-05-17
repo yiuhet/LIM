@@ -1,4 +1,7 @@
 # LIM （一款即时通讯的软件）
+
+![](https://github.com/yiuhet/LIM/raw/master/img/show.gif)  
+
 本项目主要为学习MVP框架的一款软件
 结构来自于http://www.jianshu.com/p/df9551805736 
 
