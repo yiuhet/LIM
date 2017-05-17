@@ -1,7 +1,5 @@
 # LIM （一款即时通讯的软件）
 
-![](https://github.com/yiuhet/LIM/raw/master/img/show.gif)  
-
 本项目主要为学习MVP框架的一款软件
 结构来自于http://www.jianshu.com/p/df9551805736 
 
@@ -12,3 +10,5 @@ chat功能使用了环信SDK，使用Bmob来储存用户数据，实现了用户
 界面：    遵循Google Meterial 设计风格
 
 其他：butterknife，环信sdk，Bmob储存用户数据，BottomBar
+
+![](https://github.com/yiuhet/LIM/raw/master/img/show.gif)  
