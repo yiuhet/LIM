@@ -1,7 +1,9 @@
 package com.example.yiuhet.lim.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -34,6 +36,7 @@ public class RegisterActivity extends MVPBaseActivity<RegisterView, RegisterPres
     @Override
     protected void init() {
         super.init();
+
         ButterKnife.bind(this);
     }
 

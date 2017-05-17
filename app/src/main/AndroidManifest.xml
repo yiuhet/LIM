@@ -68,7 +68,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.RegisterActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".ui.activity.ChatActivity"
             android:windowSoftInputMode="adjustResize"

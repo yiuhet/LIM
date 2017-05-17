@@ -4,10 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.yiuhet.lim.MVPBaseActivity;
@@ -47,6 +49,10 @@ public class SplashActivity extends MVPBaseActivity<SplashView, SplashPresenterI
     @Override
     protected void init() {
         super.init();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
         ButterKnife.bind(this);
         Random random = new Random(SystemClock.elapsedRealtime());//SystemClock.elapsedRealtime() 从开机到现在的毫秒数（手机睡眠(sleep)的时间也包括在内）
         mIvEntry.setImageResource(Imgs[random.nextInt(Imgs.length)]);

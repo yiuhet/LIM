@@ -1,6 +1,7 @@
 package com.example.yiuhet.lim.ui.activity;
 
 import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.PermissionChecker;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +43,10 @@ public class LoginActivity extends MVPBaseActivity<LoginView, LoginPresenterImp1
     @Override
     protected void init() {
         super.init();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
         ButterKnife.bind(this);
         mPasswordedt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

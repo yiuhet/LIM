@@ -104,6 +104,7 @@ public class ChatActivity extends MVPBaseActivity<ChatView, ChatPresenterImp1> i
         setSupportActionBar(mToolbar);
         mToolbarTitle.setText("与" + mUsername + "聊天中");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override

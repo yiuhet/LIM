@@ -95,6 +95,7 @@ public class AddFriendActivity extends MVPBaseActivity<AddFriendView, AddFriendP
         setSupportActionBar(mToolbar);
         mToolbarTitle.setText("查找好友");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @OnClick(R.id.btn_search)

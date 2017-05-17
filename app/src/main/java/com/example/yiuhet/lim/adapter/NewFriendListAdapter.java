@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.example.yiuhet.lim.database.DatabaseManager;
 import com.example.yiuhet.lim.model.Contact;
 import com.example.yiuhet.lim.utils.AddFromViewListener;
 import com.example.yiuhet.lim.widget.NewFriendItemView;
@@ -36,9 +37,12 @@ public class NewFriendListAdapter extends RecyclerView.Adapter<NewFriendListAdap
     @Override
     public void onBindViewHolder(NewFriendHolder holder, int position) {
         Log.d("ccccc","onBindViewHolder   "+mContact);
-        holder.mNewFriendItemView.bindView(mContact.get(position),mAddFromViewListener);
+        holder.mNewFriendItemView.bindView(mContact.get(position),mAddFromViewListener,isAdd(mContact.get(position)));
     }
 
+    private boolean isAdd(String contact) {
+        return DatabaseManager.getInstance().isExits(contact);
+    }
     @Override
     public int getItemCount() {
         return  mContact.size() ;

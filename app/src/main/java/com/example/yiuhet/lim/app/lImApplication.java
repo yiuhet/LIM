@@ -2,6 +2,7 @@ package com.example.yiuhet.lim.app;
 
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
@@ -20,14 +21,20 @@ import cn.bmob.v3.Bmob;
 public class lImApplication extends Application {
 
     public static final String TAG = "LimApplication";
+
+    public static Context sAppContext;
     @Override
     public void onCreate() {
         super.onCreate();
         Log.e(TAG, "enter the service process!");
+        sAppContext = getApplicationContext();
         initEasemob();
         initBmob();
     }
 
+    public static Context getAppContext() {
+        return sAppContext;
+    }
     private void initBmob() {
         Bmob.initialize(this,"ac3363bdf01cf6a747e5db5189741002");
     }

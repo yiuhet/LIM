@@ -25,4 +25,5 @@
     <string name="password_error">密码不合法,密码应为6-18位的数字!</string>
     <string name="password_different">两次密码不一致!</string>
     <string name="username_used">用户名已存在!</string>
+    <string name="toolbar_padding_top">0dp</string>
 </resources>

@@ -4,13 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_form"
     android:layout_width="match_parent"
-    android:background="@color/gray"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@drawable/bg7"
         >
 
         <ImageView
@@ -20,36 +20,32 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="100dp"
-            android:src="@mipmap/login_head" />
+            android:src="@drawable/img_head" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/gray"
             android:layout_margin="12dp">
             <AutoCompleteTextView
                 android:id="@+id/edt_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_login_user"
-                android:maxLines="1"
-                android:imeOptions="actionUnspecified"
-                android:hint="用户名"
-                android:inputType="textPersonName" />
+                style="@style/edit_user_style"
+                android:hint="  用户名" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/gray"
             android:layout_margin="12dp">
             <EditText
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_login_password"
-                android:maxLines="1"
-                android:imeOptions="actionUnspecified"
-                android:hint="密码"
-                android:inputType="textPassword" />
+                style="@style/edit_password_style"
+                android:hint="  密码" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -72,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textColor="@color/gray"
                 android:text="还没有账号? "/>
             <TextView
                 android:id="@+id/tx_sign_up"

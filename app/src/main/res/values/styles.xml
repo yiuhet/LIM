@@ -7,12 +7,25 @@
         <item name="colorPrimaryDark">@color/green_pressed</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="edit_user_style">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:imeOptions">actionUnspecified</item>
+        <item name="android:drawableLeft">@drawable/ic_login_user</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="edit_password_style">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:imeOptions">actionUnspecified</item>
+        <item name="android:drawableLeft">@drawable/ic_login_password</item>
+        <item name="android:inputType">textPassword</item>
+    </style>
 
 </resources>

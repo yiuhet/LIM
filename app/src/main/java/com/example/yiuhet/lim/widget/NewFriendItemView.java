@@ -42,9 +42,13 @@ public class NewFriendItemView extends RelativeLayout {
     }
 
 
-    public void bindView(String contact, AddFromViewListener mAddFromViewListener) {
+    public void bindView(String contact, AddFromViewListener mAddFromViewListener,boolean isAdd) {
         this.mAddFromViewListener = mAddFromViewListener;
         mUserName.setText(contact);
+        if (isAdd) {
+            mBtnAdd.setEnabled(false);
+            mBtnAdd.setText("已添加");
+        }
     }
     @OnClick(R.id.btn_add)
     public void onViewClicked() {

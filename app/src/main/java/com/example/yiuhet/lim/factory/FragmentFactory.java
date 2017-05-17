@@ -16,6 +16,7 @@ public class FragmentFactory {
     private BaseFragment mContactFragment;
     private BaseFragment mConversationFragment;
     private BaseFragment mSettingFragment;
+
     public static FragmentFactory getInstance() {
         if (sFragmentFactory == null) {
             synchronized (FragmentFactory.class) {

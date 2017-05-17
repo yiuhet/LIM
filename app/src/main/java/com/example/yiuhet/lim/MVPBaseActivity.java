@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -22,11 +23,6 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-        }
         initToolbar();
         mPresenter = createPresenter();
         mPresenter.attachView((V)this);

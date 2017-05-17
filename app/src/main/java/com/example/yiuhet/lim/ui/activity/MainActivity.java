@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.yiuhet.lim.R;
@@ -34,21 +38,26 @@ public class MainActivity extends AppCompatActivity {
     Toolbar mToolbar;
     @BindView(R.id.toolbar_title)
     TextView mToolbarTitle;
+    @BindView(R.id.main_relative)
+    RelativeLayout mMainRelative;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.activity_main);
+
+        //https://www.zhihu.com/question/31468556 Android 5.0 如何实现将布局的内容延伸到状态栏?
+        //同时设置 windowTranslucentStatus="true" 和 fitsSystemWindow="true" bug
+        //Android 5.0及以上如何在Translucent模式下防止键盘挡住EditText？ https://www.zhihu.com/question/30804539
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+//            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+//        }
 
         ButterKnife.bind(this);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
-            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
-        }
-
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -67,6 +76,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        setContentView(View.inflate(this, layoutResID, null));
+    }
+
+    @Override
+    public void setContentView(View view) {
+        if (mMainRelative == null) return;
+        mMainRelative.addView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        setSupportActionBar(mToolbar);
     }
 
     @Override
